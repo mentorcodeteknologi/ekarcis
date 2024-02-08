@@ -1,0 +1,13 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/ekarcis1/public_html
+    - /bin/cp -R $SOURCE_DIR/* $DEPLOYPATH
+    - /bin/cp $SOURCE_DIR/.[^.]* $DEPLOYPATH 2>/dev/null || echo "No hidden files to copy"
+    - /bin/rm -rf $DEPLOYPATH/vendor
+    - /bin/rm -rf $DEPLOYPATH/node_modules
+    - /bin/rm -rf $DEPLOYPATH/.git
+    - /bin/mkdir -p $DEPLOYPATH/{storage,bootstrap/cache}
+    - /bin/chmod -R 755 $DEPLOYPATH
+    - /bin/chmod -R g-w $DEPLOYPATH
+    - /bin/chown -R username:ekarcis1 $DEPLOYPATH
