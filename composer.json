@@ -79,5 +79,8 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
+    },
+    "conflict": {
+        "symfony/console": "5.4.35"
     }
 }
