@@ -22,6 +22,7 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\WalletController;
+use App\Http\Controllers\BillingController;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -137,7 +138,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/view-user/{id}', [AppUserController::class, 'userDetail']);
     Route::post('/pay-to-org', [OrderController::class, 'payToUser']);
     Route::post('/pay-to-organization', [OrderController::class, 'payToOrganization']);
-    Route::post('admin-report/org-key',[UserController::class,'orgKey'])->name('orgKey');
+    Route::post('admin-report/org-key', [UserController::class, 'orgKey'])->name('orgKey');
     Route::any('organization/stripe/create-session', [UserController::class, 'checkoutSession'])->name('orgStripe.checkoutSession');
     Route::get('org/stripe/success', [UserController::class, 'stripeSuccess'])->name('orgStripe.success');
     Route::get('/view-settlement/{id}', [OrderController::class, 'viewSettlement']);
@@ -185,3 +186,12 @@ Route::get('/rave/callback/{id}', [UserController::class, 'callback'])->name('ca
 
 Route::get('FlutterWavepayment/{id}', [UserController::class, 'FlutterWavepayment']);
 Route::get('transction_verify/{id}', [UserController::class, 'transction_verify']);
+
+
+// ROUTES BILLING
+Route::get('/billing', [BillingController::class, 'index'])->name('billing');
+Route::get('/billing/notify', [BillingController::class, 'billingNotify'])->name('billing.notify');
+Route::get('/billing/success', [BillingController::class, 'billingSuccess'])->name('billing.success');
+Route::get('/billing/failed', [BillingController::class, 'billingFailed'])->name('billing.failed');
+Route::get('/billing/error', [BillingController::class, 'billingError'])->name('billing.error');
+Route::get('/billing/access_token', [BillingController::class, 'accessToken'])->name('billing.accessToken');
