@@ -1926,7 +1926,7 @@ CREATE TABLE `wallets` (
   `slug` varchar(191) NOT NULL,
   `uuid` char(36) NOT NULL,
   `description` varchar(191) DEFAULT NULL,
-  `meta` longtext DEFAULT NULL,
+  `meta` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`meta`)),
   `balance` decimal(64,0) NOT NULL DEFAULT 0,
   `decimal_places` smallint(5) UNSIGNED NOT NULL DEFAULT 2,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1951,7 +1951,7 @@ CREATE TABLE `transactions` (
   `type` enum('deposit','withdraw') NOT NULL,
   `amount` decimal(64,0) NOT NULL,
   `confirmed` tinyint(1) NOT NULL,
-  `meta` longtext DEFAULT NULL,
+  `meta` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`meta`)),
   `uuid` char(36) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL

@@ -190,8 +190,8 @@ Route::get('transction_verify/{id}', [UserController::class, 'transction_verify'
 
 // ROUTES BILLING
 Route::get('/billing', [BillingController::class, 'index'])->name('billing');
-Route::get('/billing/notify', [BillingController::class, 'billingNotify'])->name('billing.notify');
+Route::get('/snap/v1.0/debit/notify', [BillingController::class, 'billingNotify'])->name('billing.notify');
 Route::get('/billing/success', [BillingController::class, 'billingSuccess'])->name('billing.success');
 Route::get('/billing/failed', [BillingController::class, 'billingFailed'])->name('billing.failed');
 Route::get('/billing/error', [BillingController::class, 'billingError'])->name('billing.error');
-Route::get('/billing/access_token', [BillingController::class, 'accessToken'])->name('billing.accessToken');
+Route::get('/snap/v1.0/access-token/b2b', [BillingController::class, 'accessToken'])->name('billing.accessToken');
