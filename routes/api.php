@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\OrganizationApiController;
 use App\Http\Controllers\ScannerApiController;
+use App\Http\Controllers\AstrapayController;
 
 
 /*
@@ -16,7 +17,25 @@ use App\Http\Controllers\ScannerApiController;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
+
 */
+
+
+
+// ROUTES ASTRAPAY
+Route::post('/create-access-b2b', [AstrapayController::class, 'createAccessTokenB2B']);
+Route::post('/create/payment-h2h', [AstrapayController::class, 'createPaymentH2H']);
+Route::post('/status/payment-h2h', [AstrapayController::class, 'statusPaymentH2H']);
+
+// ROUTES BILLING
+Route::get('/billing/success', [AstrapayController::class, 'billingUpdateStatus']);
+Route::get('/billing/failed', [AstrapayController::class, 'billingUpdateStatus']);
+Route::get('/billing/error', [AstrapayController::class, 'billingUpdateStatus']);
+
+// ROUTES MY API FOR ASTRAPAY CALL BACK API
+Route::post('/billing/snap/v1.0/access-token/b2b', [AstrapayController::class, 'accessToken']);
+Route::post('/billing/snap/v1.0/debit/notify', [AstrapayController::class, 'notify']);
+
 
 
 
@@ -26,7 +45,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/user/login', [ApiController::class, 'userLogin']);
 Route::post('/user/register', [ApiController::class, 'userRegister']);
-Route::post('/user/otp-verify',[ApiController::class,'otpVerify']);
+Route::post('/user/otp-verify', [ApiController::class, 'otpVerify']);
 Route::post('/user/forget-password', [ApiController::class, 'forgetPassword']);
 Route::get('/user/setting', [ApiController::class, 'allSetting']);
 Route::post('/user/events', [ApiController::class, 'events']);
@@ -63,8 +82,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:userApi']], function ()
     Route::get('/clear-notification', [ApiController::class, 'clearNotification']);
     Route::get('/user_delete_self/{id}', [ApiController::class, 'user_delete']);
     // Wallet
-    Route::get('/get-wallet',[ApiController::class,'getBalance'])->name('getBalance');
-    Route::post('/wallet-deposit',[ApiController::class,'deposit'])->name('deposit');
+    Route::get('/get-wallet', [ApiController::class, 'getBalance'])->name('getBalance');
+    Route::post('/wallet-deposit', [ApiController::class, 'deposit'])->name('deposit');
 });
 
 // organization
@@ -72,7 +91,7 @@ Route::post('/organization/login', [OrganizationApiController::class, 'organizat
 Route::post('/organization/forget-password', [OrganizationApiController::class, 'forgetPassword']);
 Route::post('/organization/register', [OrganizationApiController::class, 'organizationRegister']);
 Route::get('/organization/setting', [OrganizationApiController::class, 'organizationSetting']);
-Route::post('/organization/otp-verify',[OrganizationApiController::class,'otpVerify']);
+Route::post('/organization/otp-verify', [OrganizationApiController::class, 'otpVerify']);
 
 Route::group(['prefix' => 'organization', 'middleware' => ['auth:api']], function () {
     Route::post('/set-profile', [OrganizationApiController::class, 'setProfile']);
@@ -118,7 +137,6 @@ Route::group(['prefix' => 'organization', 'middleware' => ['auth:api']], functio
     Route::get('/clear-notification', [OrganizationApiController::class, 'clearNotification']);
     Route::post('/remove-gallery', [OrganizationApiController::class, 'removeGalleryImage']);
     Route::post('/add-gallery-image', [OrganizationApiController::class, 'addImageGallery']);
-
 });
 
 // scanner
