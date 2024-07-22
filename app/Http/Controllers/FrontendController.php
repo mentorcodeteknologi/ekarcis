@@ -259,7 +259,6 @@ class FrontendController extends Controller
     }
     public function userRegister(Request $request)
     {
-        dd($request->all());
         $request->validate([
             'name' => 'bail|required',
             'last_name' => 'bail|required',
