@@ -899,6 +899,30 @@
                                         </div>
 
                                     </div>
+                                    <div class="form-group row mb-4">
+
+                                        <label
+                                            class="col-form-label text-md-right col-12 col-md-3">{{ __('AstraPay') }}</label>
+
+                                        <div class="col-sm-12 col-md-9">
+
+                                            <div class="custom-switches-stacked mt-2">
+
+                                                <label class="custom-switch pl-0">
+
+                                                    <input type="checkbox" name="astrapay"
+                                                        {{ $payment->razor == '1' ? 'checked' : '' }} value="1"
+                                                        class="custom-switch-input">
+
+                                                    <span class="custom-switch-indicator"></span>
+
+                                                </label>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
 
                                     <div class="form-group row mb-4">
 
