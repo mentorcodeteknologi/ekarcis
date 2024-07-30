@@ -247,16 +247,16 @@ class Helpers
     // ======================================== //
     // GENERATE ACCESS TOKEN B2B FOR ASTRA PAY
     // ======================================= //
-    public function generateAccessTokenforAstrapay($ec, $xTimestamp)
+    public function generateAccessTokenforAstrapay($xTimestamp)
     {
         // CREATE RSA
-        $result = self::createRSA($ec, $xTimestamp);
+        $result = self::createRSA($xTimestamp);
         if (!$result) {
             return ResponseFormatter::error("EC Not Found", 404, 404);
         }
 
         // CHECK MERCHENT SOCCER ACADEMIA / E-KARCIS
-        $checkMerchant = self::checkMerchant($ec);
+        $checkMerchant = self::checkMerchant();
         if (empty($checkMerchant)) {
             return ResponseFormatter::error("EC Not Found", 404, 404);
         }
@@ -286,7 +286,6 @@ class Helpers
             return $responseToken;
         }
 
-        // return $responseToken['accessToken'];
         return [
             "response"     => $responseToken,
             "access_token" => $responseToken['accessToken'],
@@ -351,13 +350,12 @@ class Helpers
     }
 
     // ================================ //
-    public function statusPaymentH2H($ec = null, $harga, $trxReferenceNo, $astrapayTrxId)
+    public function statusPaymentH2H($harga, $trxReferenceNo, $astrapayTrxId)
     {
-        $ec                  = isset($ec) ? $ec : "6899b9309d62ddf1a4f381e1f2b93957";
         $originalReferenceNo = $astrapayTrxId == null ? "" : $astrapayTrxId;
 
         // GENERATE ACCESS TOKEN
-        $resultB2B = self::generateAccessToken($ec);
+        $resultB2B = self::generateAccessToken();
         if (!isset($resultB2B['access_token'])) {
             return $resultB2B;
         }

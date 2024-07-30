@@ -44,13 +44,13 @@ class AstrapayController extends Controller
     {
         try {
             // $ec = $request->input('ec') ?? "6899b9309d62ddf1a4f381e1f2b93957";
-            $ec = $request->input('ec');
-            if (empty($ec)) {
-                return ResponseFormatter::error("Param Not Found", 404);
-            }
+            // $ec = $request->input('ec');
+            // if (empty($ec)) {
+            //     return ResponseFormatter::error("Param Not Found", 404);
+            // }
 
             // GENERATE ACCESS TOKEN
-            $resultB2B = $this->helper->generateAccessToken();
+            return $resultB2B = $this->helper->generateAccessToken();
             if (!isset($resultB2B['access_token'])) {
                 return $resultB2B;
             }
@@ -70,22 +70,22 @@ class AstrapayController extends Controller
         try {
             // VALIDATION REQUIRED INPUT
             $request->validate([
-                'user_id'     => ['required', 'uuid'],
-                'tim_id'      => ['required', 'uuid'],
+                // 'user_id'     => ['required', 'uuid'],
+                // 'tim_id'      => ['required', 'uuid'],
                 'harga'       => ['required', 'string', 'max:255'],
                 'description' => ['required', 'string', 'max:255']
             ]);
 
-            $ec          = $request->input('ec');
+            // $ec          = $request->input('ec');
             $harga       = $request->input('harga');
             $description = $request->input('description');
             $userId      = $request->input('user_id');
             $turnamenId  = $request->input('turnamen_id') ?? null;
             $timId       = $request->input('tim_id') ?? null;
 
-            if (empty($ec)) {
-                return ResponseFormatter::error("Param Not Found", 404);
-            }
+            // if (empty($ec)) {
+            //     return ResponseFormatter::error("Param Not Found", 404);
+            // }
 
             // GENERATE ACCESS TOKEN
             $resultB2B = $this->helper->generateAccessToken();
@@ -184,12 +184,12 @@ class AstrapayController extends Controller
                 'harga'  => ['required', 'max:255'],
             ]);
 
-            $ec             = $request->input('ec') ?? "6899b9309d62ddf1a4f381e1f2b93957";
+            // $ec             = $request->input('ec') ?? "6899b9309d62ddf1a4f381e1f2b93957";
             $harga          = $request->input('harga');
             $trxReferenceNo = $request->input('trx_id');
 
             // GENERATE ACCESS TOKEN
-            $resultB2B = $this->helper->generateAccessToken($ec);
+            $resultB2B = $this->helper->generateAccessToken();
             if (!isset($resultB2B['access_token'])) {
                 return $resultB2B;
             }
@@ -278,9 +278,9 @@ class AstrapayController extends Controller
             $xSignature = $request->header('x-signature');
             $xTimestamp = $request->header('x-timestamp');
 
-            $ec = $request->input('ec') ?? "6899b9309d62ddf1a4f381e1f2b93957";
+            // $ec = $request->input('ec') ?? "6899b9309d62ddf1a4f381e1f2b93957";
             // GENERATE ACCESS TOKEN
-            $resultB2B = $this->helper->generateAccessTokenforAstrapay($ec, $xTimestamp);
+            $resultB2B = $this->helper->generateAccessTokenforAstrapay($xTimestamp);
             if (!isset($resultB2B['access_token'])) {
                 return $resultB2B;
             }
