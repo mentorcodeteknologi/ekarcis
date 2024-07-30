@@ -99,13 +99,11 @@ class Helpers
         foreach ($headers as $header) {
             $curlCommand .= "--header '$header' \\\n";
         }
-        if (
-            $method === 'POST' && !is_null($body)
-        ) {
+        if ($method === 'POST' && !is_null($body)) {
             $jsonBody = json_encode(json_decode($body), JSON_PRETTY_PRINT);
             $curlCommand .= "--data '$jsonBody' \\\n";
         }
-        $curlCommand .= "--request $method";
+        // $curlCommand .= "--request $method";
 
         $datas =  "Generated cURL command for debug:\n$curlCommand\n";
 
@@ -117,9 +115,18 @@ class Helpers
 
         curl_close($ch);
 
+        // return [
+        //     "response" => $response,
+        //     "request" => $datas
+        // ];
+
+        $responseJson = str_replace("\\", "", $response);
+        // Remove backslashes and newlines
+        $clean_curl_command = str_replace(array("\n"), "", $datas);
+
         return [
-            "response" => $response,
-            "data"     => $datas
+            "response"      => json_decode($responseJson, true),
+            "request"       => $clean_curl_command,
         ];
     }
 
