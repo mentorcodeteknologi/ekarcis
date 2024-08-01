@@ -349,7 +349,7 @@ class AstrapayController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return ResponseFormatter::error($validator->errors()->first());
+                return ResponseFormatter::error($validator->errors()->first(), 4005600);
             }
 
             // RETRIVE DATA FOR PAYLOAD HEADER
