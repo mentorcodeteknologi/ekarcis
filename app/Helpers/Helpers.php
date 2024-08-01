@@ -316,7 +316,7 @@ class Helpers
         $requestBody = [
             "originalPartnerReferenceNo" => $trxReferenceNo, // ID transaksi dari Merchant/Partner (Merchant/Partner Transaction ID)
             "originalReferenceNo"        => "",              // ID transaksi dari AstraPay
-            "serviceCode"                => "54",
+            "serviceCode"                => "56",
             "amount"                     => [
                 "value"                  => $harga,
                 "currency"               => "IDR"
@@ -344,7 +344,7 @@ class Helpers
         $body = [
             "originalPartnerReferenceNo" => $trxReferenceNo,
             "originalReferenceNo"        => "",
-            "serviceCode"                => "54",
+            "serviceCode"                => "56",
             "amount"                     => [
                 "value"                  => $harga,
                 "currency"               => "IDR"

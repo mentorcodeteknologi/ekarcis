@@ -378,6 +378,7 @@ class AstrapayController extends Controller
             // VALIDATION TRANSACTION STATUS
             $validationTrx = $this->helper->checkStatusPayment($harga, $originalPartnerReferenceNo);
             if ($validationTrx['responseCode'] != 2005500) {
+                $validationTrx['responseCode'] = 4005600;
                 return $validationTrx;
             }
 
