@@ -36,4 +36,15 @@ class ResponseFormatter
 
         return response()->json(self::$response, substr($responseCode, 0, 3));
     }
+
+    // ============================ //
+    //  FUNCTION FOR ERROR DATA V1  //
+    // ============================ //
+    public static function errorV1($message = null, $responseCode = 400, $serviceCode = 58, $caseCode = 00)
+    {
+        self::$response['responseCode']    = $serviceCode . $caseCode . $responseCode;
+        self::$response['responseMessage'] = $message;
+
+        return response()->json(self::$response, $responseCode);
+    }
 }

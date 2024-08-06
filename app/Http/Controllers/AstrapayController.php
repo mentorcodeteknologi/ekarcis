@@ -349,7 +349,7 @@ class AstrapayController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return ResponseFormatter::error($validator->errors()->first(), 4005600);
+                return ResponseFormatter::errorV1("Bad Request", 400, 56, 00);
             }
 
             // RETRIVE DATA FOR PAYLOAD HEADER
@@ -375,6 +375,7 @@ class AstrapayController extends Controller
             // if ($merchantId != env('SOCCER_MID') && $merchantId != env('SC_MID')) {
             //     return ResponseFormatter::error("Merchant ID Not Found", 404);
             // }
+
             // VALIDATION TRANSACTION STATUS
             $validationTrx = $this->helper->checkStatusPayment($harga, $originalPartnerReferenceNo);
             if ($validationTrx['responseCode'] != 2005500) {
